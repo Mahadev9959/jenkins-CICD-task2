@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -12,7 +13,9 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing the application...'
-                sh 'docker run --rm jenkins-cicd-task2:1.0 node -e "const http = require('\''http'\''); const server = http.createServer((req, res) => res.end('\''OK'\'')); server.listen(3000, '\''127.0.0.1'\'', () => server.close());"'
+                sh '''
+                    docker run --rm jenkins-cicd-task2:1.0 node -e 'const http = require("http"); const server = http.createServer((req, res) => res.end("OK")); server.listen(3000, "127.0.0.1", () => server.close());'
+                '''
             }
         }
 
@@ -27,3 +30,4 @@ pipeline {
         }
     }
 }
+
